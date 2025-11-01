@@ -8,7 +8,7 @@ class Veterinarian(models.Model):
     name = models.CharField(max_length=100)
     specialization = models.CharField(max_length=100)
     experience = models.PositiveIntegerField()
-    # 👇 remove rating input — we’ll calculate it dynamically
+    #  remove rating input — we’ll calculate it dynamically
     rating = models.FloatField(default=0, editable=False)
 
     def __str__(self):
@@ -31,7 +31,7 @@ class Review(models.Model):
     review_text = models.TextField()
     sentiment = models.IntegerField(
     choices=[(1, 'Positive'), (0, 'Negative')],
-    default=1  # 👈 default value added
+    default=1  
 )
     created_at = models.DateTimeField(auto_now_add=True)
 
@@ -40,5 +40,5 @@ class Review(models.Model):
 
     def save(self, *args, **kwargs):
         super().save(*args, **kwargs)
-        self.vet.update_rating()  # 👈 update average rating automatically
+        self.vet.update_rating() 
 

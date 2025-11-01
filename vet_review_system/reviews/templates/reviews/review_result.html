@@ -5,9 +5,9 @@
   <p class="lead">{{ review.review_text }}</p>
   <h4 class="mt-4">Predicted Sentiment: 
     {% if review.sentiment == 1 %}
-      <span class="badge bg-success">Positive 😊</span>
+      <span class="badge bg-success">Positive</span>
     {% else %}
-      <span class="badge bg-danger">Negative 😞</span>
+      <span class="badge bg-danger">Negative</span>
     {% endif %}
   </h4>
   <a href="{% url 'veterinarian_list' %}" class="btn btn-outline-dark mt-4">Back to Veterinarians</a>

@@ -1,25 +1,55 @@
 {% extends 'reviews/base.html' %}
 {% block content %}
-<div class="card shadow-sm p-4">
-  <h3 class="mb-3">Veterinarian Rankings</h3>
-  <table class="table table-striped">
-    <thead><tr><th>Name</th><th>Specialization</th><th>Experience</th><th>Avg Sentiment</th></tr></thead>
-    <tbody>
-      {% for v in vets %}
-      <tr>
-        <td>{{ v.name }}</td>
-        <td>{{ v.specialization }}</td>
-        <td>{{ v.experience }} yrs</td>
-        <td>
-          {% if v.avg_sentiment %}
-            {{ v.avg_sentiment|floatformat:2 }}
-          {% else %}
-            No reviews yet
-          {% endif %}
-        </td>
-      </tr>
-      {% endfor %}
-    </tbody>
-  </table>
+<div class="container mt-5">
+  <div class="card shadow-sm p-4">
+    <h2 class="text-center text-danger mb-4">
+     Veterinarian Ratings
+    </h2>
+
+    <table class="table table-striped text-center align-middle">
+      <thead class="table-dark">
+        <tr>
+          <th>#</th>
+          <th>Name</th>
+          <th>Specialization</th>
+          <th>Experience</th>
+          <th>Overall Rating</th>
+          <th>Positive Reviews</th>
+          <th>Negative Reviews</th>
+        </tr>
+      </thead>
+      <tbody>
+        {% for vet in vets %}
+        <tr>
+          <td>{{ forloop.counter }}</td>
+          <td>{{ vet.name }}</td>
+          <td>{{ vet.specialization }}</td>
+          <td>{{ vet.experience }} years</td>
+          <td>
+            {% if vet.avg_sentiment %}
+              {% if vet.avg_sentiment >= 0.75 %}
+                <span class="badge bg-success">Excellent</span>
+              {% elif vet.avg_sentiment >= 0.5 %}
+                <span class="badge bg-warning text-dark">Good</span>
+              {% else %}
+                <span class="badge bg-danger">Poor</span>
+              {% endif %}
+            {% else %}
+              <span class="text-muted">No reviews yet</span>
+            {% endif %}
+          </td>
+          <td>{{ vet.positive_count|default:"0" }}</td>
+          <td>{{ vet.negative_count|default:"0" }}</td>
+        </tr>
+        {% endfor %}
+      </tbody>
+    </table>
+
+    <div class="text-center mt-3">
+      <a href="{% url 'veterinarian_list' %}" class="btn btn-outline-dark">
+        ⬅ Back to Vets
+      </a>
+    </div>
+  </div>
 </div>
 {% endblock %}

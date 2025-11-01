@@ -6,5 +6,11 @@ class ReviewForm(forms.ModelForm):
         model = Review
         fields = ['vet', 'review_text']
         widgets = {
-            'review_text': forms.Textarea(attrs={'class': 'form-control', 'rows': 4, 'placeholder': 'Write your experience...'}),
-        }
+    'review_text': forms.Textarea(attrs={
+        'class': 'form-control',
+        'rows': 4,
+        'placeholder': 'Share your experience with the veterinarian...'
+    }),
+    'vet': forms.Select(attrs={'class': 'form-select'})
+}
+

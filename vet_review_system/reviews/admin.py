@@ -1,7 +1,5 @@
 from django.contrib import admin
-from .models import Veterinarian
+from .models import Veterinarian, Review
 
-@admin.register(Veterinarian)
-class VeterinarianAdmin(admin.ModelAdmin):
-    list_display = ('name', 'specialization', 'experience', 'rating')
-    readonly_fields = ('rating',)
+admin.site.register(Veterinarian)
+admin.site.register(Review)
